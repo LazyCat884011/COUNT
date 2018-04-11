@@ -21,8 +21,13 @@ namespace ConsoleApplication2
             string[] blood = { "O", "其他", "O", "O", "A", "O", "A", "A", "O", "O", "A", "O", "A", "B", "O", "O", "A", "其他", "O", "O", "A", "", "B", "O", "", "O", "B", "O", "B", "B", "B", "O", "O", "AB", "O", "B", "A", "O", "O", "", "O", "A", "", "O", "O", "A", "O", "O", "其他", "B", "O", "O", "O", "A", "AB", "A", "O", "", "AB", "", "O", "O", "O", "", "O" };
             string[] sns = { "A106082026", "A106082016", "A106082062", "A106082054", "A104082006", "A106082029", "A106082046", "A106082030", "A106082022", "A106082034", "A103082022", "A106082020", "A106082011", "A106082024", "A105082201", "106082010", "A106082028", "a106082056", "a106082043", "A106082006", "A106082051", "A106082032", "a106082058", "A106082035", "a106082017", "A104082036", "A106082009", "a106082007", "A106082052", "A106082008", "A106082063", "A106082038", "A106082025", "A106082057", "A106082013", "A106082027", "A106082048", "a106082036", "A106082059", "a106082045", "A106082012", "A106082037", "A106082021", "A106082031", "A106082061", "A106082042", "A106082023", "A106082040", "A106082001", "a106082002", "A106082014", "A106082041", "A106082049", "A106082015", "A106082044", "A106082047", "A106082018", "A106082005", "A106082050", "a106082055", "A106082039", "A104082013", "A106082029", "", "A104040024" };
             string[] genders = { "男", "男", "男", "女", "男", "男", "女", "男", "男", "男", "男", "男", "女", "男", "男", "男", "女", "女", "男", "男", "女", "男", "女", "男", "男", "女", "男", "男", "女", "男", "男", "男", "男", "女", "男", "男", "女", "女", "男", "男", "女", "女", "男", "男", "男", "男", "男", "男", "女", "男", "女", "女", "女", "女", "女", "女", "男", "女", "女", "女", "女", "女", "男", "男", "女", "女", "女", "男" };
+            double grilsum = 0;
             double sum = 0;
+            double boysum = 0;
+            double lenghboy = 0;
+            double lenghgril = 0;
             double lengh = 0;
+            Console.WriteLine("天蠍座O型的人有:");
             int max = 0;
             int min = 200;
             for (int i = 0; i < sns.Length; i++)
@@ -37,12 +42,33 @@ namespace ConsoleApplication2
                     {
                         min = hight[i];
                     }
+                    if(genders[i] == "男")
+                    {
+                        boysum = boysum + hight[i];
+
+                    }
+
                     if (genders[i] == "女")
                     {
-                        sum = sum + hight[i];
-                        lengh++;
+                        grilsum = grilsum + hight[i];
+                        
                     }
+                    if (genders[i] == "男")
+                    {
+                        lenghboy++;
+                    }
+                    if (genders[i] == "女")
+                    {
+                        lenghgril++;
+                    }
+                    sum = sum + hight[i];
+                    lengh++;
                 }
+                if(zodiac[i] == "天蠍"&&blood[i] == "O")
+                {
+                    Console.Write(names[i]+"\n");
+                }
+
                 if (blood[i] == "B")
                 {
                     bloodb++;
@@ -59,19 +85,28 @@ namespace ConsoleApplication2
                 {
                     bloodother++;
                 }
+
             } 
             
             double all = blood.Length;
-            double hightaverage = sum/lengh;
+            double grilhightaverage = grilsum/lenghgril;
+            double boyhightaverage = boysum / lenghboy;
             double bloodbpersent = 100 * (bloodb / all);
             double bloodapersent = 100 * (blooda / all);
             double bloodopersent = 100 * (bloodo / all);
             double bloodotherpersent = 100 * (bloodother / all);
+            double boypersent = 100 * (lenghboy / all);
+            double grilpersent = 100 * (lenghgril / all);
+            double hightaverage = sum / lengh;
+            Console.WriteLine("\n男生人數:" + lenghboy + "   " + boypersent + "%");
+            Console.WriteLine("女生人數:" + lenghgril + "   " + grilpersent + "%");
             Console.WriteLine("血型A的人數:" + blooda + "  " + bloodapersent+"%");
             Console.WriteLine("血型B的人數:" + bloodb + "  " + bloodbpersent + "%");
             Console.WriteLine("血型O的人數:" + bloodo + "  " + bloodopersent + "%");
             Console.WriteLine("血型其他的人數:" + bloodother + "  " + bloodotherpersent + "%");
-            Console.WriteLine("全班女生平均身高:" + hightaverage);
+            Console.WriteLine("全班女生平均身高:" + grilhightaverage);
+            Console.WriteLine("全班男生平均身高:" + boyhightaverage);
+            Console.WriteLine("全班平均身高:" + hightaverage);
             Console.WriteLine("班級最高身高:" + max);
             Console.WriteLine("班級最低身高:" + min);
                 Console.Write("請輸入學號:");
